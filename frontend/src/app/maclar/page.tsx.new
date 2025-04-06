@@ -1,0 +1,419 @@
+'use client';
+
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+
+// 1. Hafta maçları
+export const matches = [
+  // ... existing code ...
+  // Many matches here from week 1 to week 36
+  // Last match of week 36
+  {
+    id: '324',
+    week: 36,
+    status: 'upcoming',
+    date: '18.05.2025',
+    time: '19:00',
+    stadium: 'Recep Tayyip Erdoğan Stadyumu',
+    homeTeam: {
+      name: 'KASIMPAŞA A.Ş.',
+      logo: '/teams/kasimpasa.png',
+      score: null
+    },
+    awayTeam: {
+      name: 'RAMS BAŞAKŞEHİR FUTBOL KULÜBÜ',
+      logo: '/teams/basaksehir.png',
+      score: null
+    },
+    referee: {
+      id: 'ref324',
+      name: 'Atilla Karaoğlan',
+      image: '/referees/atilla-karaoglan.jpg'
+    }
+  },
+  // 37. Hafta maçları
+  {
+    id: '325',
+    week: 37,
+    status: 'upcoming',
+    date: '25.05.2025',
+    time: '19:00',
+    stadium: 'Başakşehir Fatih Terim Stadyumu',
+    homeTeam: {
+      name: 'RAMS BAŞAKŞEHİR FUTBOL KULÜBÜ',
+      logo: '/teams/basaksehir.png',
+      score: null
+    },
+    awayTeam: {
+      name: 'ADANA DEMİRSPOR A.Ş.',
+      logo: '/teams/adanademirspor.png',
+      score: null
+    },
+    referee: {
+      id: 'ref325',
+      name: 'Zorbay Küçük',
+      image: '/referees/zorbay-kucuk.jpg'
+    }
+  },
+  {
+    id: '326',
+    week: 37,
+    status: 'upcoming',
+    date: '25.05.2025',
+    time: '19:00',
+    stadium: 'Hatay Stadyumu',
+    homeTeam: {
+      name: 'ATAKAŞ HATAYSPOR',
+      logo: '/teams/hatayspor.png',
+      score: null
+    },
+    awayTeam: {
+      name: 'FENERBAHÇE A.Ş.',
+      logo: '/teams/fenerbahce.png',
+      score: null
+    },
+    referee: {
+      id: 'ref326',
+      name: 'Mert Güzenge',
+      image: '/referees/mert-guzenge.jpg'
+    }
+  },
+  {
+    id: '327',
+    week: 37,
+    status: 'upcoming',
+    date: '25.05.2025',
+    time: '19:00',
+    stadium: 'Tüpraş Stadyumu',
+    homeTeam: {
+      name: 'BEŞİKTAŞ A.Ş.',
+      logo: '/teams/besiktas.png',
+      score: null
+    },
+    awayTeam: {
+      name: 'ÇAYKUR RİZESPOR A.Ş.',
+      logo: '/teams/rizespor.png',
+      score: null
+    },
+    referee: {
+      id: 'ref327',
+      name: 'Ali Şansalan',
+      image: '/referees/ali-sansalan.jpg'
+    }
+  },
+  {
+    id: '328',
+    week: 37,
+    status: 'upcoming',
+    date: '25.05.2025',
+    time: '19:00',
+    stadium: 'Kalyon Stadyumu',
+    homeTeam: {
+      name: 'GAZİANTEP FUTBOL KULÜBÜ A.Ş.',
+      logo: '/teams/gaziantep.png',
+      score: null
+    },
+    awayTeam: {
+      name: 'KASIMPAŞA A.Ş.',
+      logo: '/teams/kasimpasa.png',
+      score: null
+    },
+    referee: {
+      id: 'ref328',
+      name: 'Cüneyt Çakır',
+      image: '/referees/cuneyt-cakir.jpg'
+    }
+  },
+  {
+    id: '329',
+    week: 37,
+    status: 'upcoming',
+    date: '25.05.2025',
+    time: '19:00',
+    stadium: 'Konya Büyükşehir Belediye Stadyumu',
+    homeTeam: {
+      name: 'TÜMOSAN KONYASPOR',
+      logo: '/teams/konyaspor.png',
+      score: null
+    },
+    awayTeam: {
+      name: 'CORENDON ALANYASPOR',
+      logo: '/teams/alanyaspor.png',
+      score: null
+    },
+    referee: {
+      id: 'ref329',
+      name: 'Volkan Bayarslan',
+      image: '/referees/volkan-bayarslan.jpg'
+    }
+  },
+  {
+    id: '330',
+    week: 37,
+    status: 'upcoming',
+    date: '25.05.2025',
+    time: '19:00',
+    stadium: 'Medical Park Arena',
+    homeTeam: {
+      name: 'TRABZONSPOR A.Ş.',
+      logo: '/teams/trabzonspor.png',
+      score: null
+    },
+    awayTeam: {
+      name: 'REEDER SAMSUNSPOR',
+      logo: '/teams/samsunspor.png',
+      score: null
+    },
+    referee: {
+      id: 'ref330',
+      name: 'Yaşar Kemal Uğurlu',
+      image: '/referees/yasar-kemal-ugurlu.jpg'
+    }
+  },
+  {
+    id: '331',
+    week: 37,
+    status: 'upcoming',
+    date: '25.05.2025',
+    time: '19:00',
+    stadium: 'Kayseri Kadir Has Stadyumu',
+    homeTeam: {
+      name: 'BELLONA KAYSERİSPOR',
+      logo: '/teams/kayserispor.png',
+      score: null
+    },
+    awayTeam: {
+      name: 'SİPAY BODRUM FK',
+      logo: '/teams/bodrum.png',
+      score: null
+    },
+    referee: {
+      id: 'ref331',
+      name: 'Arda Kardeşler',
+      image: '/referees/arda-kardesler.jpg'
+    }
+  },
+  {
+    id: '332',
+    week: 37,
+    status: 'upcoming',
+    date: '25.05.2025',
+    time: '19:00',
+    stadium: 'Gürsel Aksel Stadyumu',
+    homeTeam: {
+      name: 'GÖZTEPE A.Ş.',
+      logo: '/teams/goztepe.png',
+      score: null
+    },
+    awayTeam: {
+      name: 'GALATASARAY A.Ş.',
+      logo: '/teams/galatasaray.png',
+      score: null
+    },
+    referee: {
+      id: 'ref332',
+      name: 'Bahattin Şimşek',
+      image: '/referees/bahattin-simsek.jpg'
+    }
+  },
+  {
+    id: '333',
+    week: 37,
+    status: 'upcoming',
+    date: '25.05.2025',
+    time: '19:00',
+    stadium: 'Eyüp Stadyumu',
+    homeTeam: {
+      name: 'İKAS EYÜPSPOR',
+      logo: '/teams/eyupspor.png',
+      score: null
+    },
+    awayTeam: {
+      name: 'ONVO ANTALYASPOR',
+      logo: '/teams/antalyaspor.png',
+      score: null
+    },
+    referee: {
+      id: 'ref333',
+      name: 'Atilla Karaoğlan',
+      image: '/referees/atilla-karaoglan.jpg'
+    }
+  }
+];
+
+// Hafta numaralarını alıyoruz
+const weeks = [...new Set(matches.map(match => match.week))];
+
+export default function MaclarPage() {
+  const [selectedWeek, setSelectedWeek] = useState(weeks[0]);
+  const [selectedTab, setSelectedTab] = useState<'all' | 'played' | 'upcoming'>('all');
+  
+  // Filtrelenmiş maçları alıyoruz
+  const filteredMatches = matches.filter(match => {
+    if (selectedWeek && match.week !== selectedWeek) return false;
+    if (selectedTab === 'played' && match.status !== 'played') return false;
+    if (selectedTab === 'upcoming' && match.status !== 'upcoming') return false;
+    return true;
+  });
+
+  return (
+    <div className="max-w-4xl mx-auto my-8 px-4">
+      <h1 className="text-3xl font-bold mb-6 text-center">Maçlar</h1>
+      
+      {/* Hafta seçimi */}
+      <div className="mb-6">
+        <label htmlFor="week-select" className="block text-sm font-medium text-gray-700 mb-1">
+          Hafta Seçin
+        </label>
+        <select
+          id="week-select"
+          value={selectedWeek}
+          onChange={(e) => setSelectedWeek(Number(e.target.value))}
+          className="block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500"
+        >
+          {weeks.map(week => (
+            <option key={week} value={week}>
+              {week}. Hafta
+            </option>
+          ))}
+        </select>
+      </div>
+      
+      {/* Sekmeler */}
+      <div className="flex border-b border-gray-200 mb-6">
+        <button
+          onClick={() => setSelectedTab('all')}
+          className={`py-2 px-4 font-medium text-sm focus:outline-none ${
+            selectedTab === 'all'
+              ? 'text-yellow-600 border-b-2 border-yellow-500'
+              : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+          }`}
+        >
+          Tüm Maçlar
+        </button>
+        <button
+          onClick={() => setSelectedTab('played')}
+          className={`py-2 px-4 font-medium text-sm focus:outline-none ${
+            selectedTab === 'played'
+              ? 'text-yellow-600 border-b-2 border-yellow-500'
+              : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+          }`}
+        >
+          Oynanmış Maçlar
+        </button>
+        <button
+          onClick={() => setSelectedTab('upcoming')}
+          className={`py-2 px-4 font-medium text-sm focus:outline-none ${
+            selectedTab === 'upcoming'
+              ? 'text-yellow-600 border-b-2 border-yellow-500'
+              : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+          }`}
+        >
+          Gelecek Maçlar
+        </button>
+      </div>
+      
+      {/* Maç listesi */}
+      <div className="space-y-6">
+        {filteredMatches.length === 0 ? (
+          <div className="text-center py-8 text-gray-500">
+            Bu kriterlere uygun maç bulunamadı.
+          </div>
+        ) : (
+          filteredMatches.map(match => (
+            <div key={match.id} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
+              <div className="flex justify-between items-center mb-4">
+                <div className="text-sm text-gray-500">
+                  {match.date} • {match.time} • {match.stadium}
+                </div>
+                <div className="text-xs font-medium px-2 py-1 rounded-full bg-gray-100 text-gray-800">
+                  {match.week}. Hafta
+                </div>
+              </div>
+              
+              <div className="flex justify-between items-center mb-6">
+                <div className="text-center flex-1 flex flex-col items-center">
+                  <div className="h-16 w-16 relative mb-2 bg-gray-100 rounded-full p-1">
+                    <div className="relative h-full w-full">
+                      <Image 
+                        src={match.homeTeam.logo} 
+                        alt={match.homeTeam.name}
+                        fill 
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
+                  <div className="font-semibold">{match.homeTeam.name}</div>
+                  {match.status === 'played' && (
+                    <div className="text-xl font-bold mt-1">{match.homeTeam.score}</div>
+                  )}
+                </div>
+                
+                <div className="mx-4">
+                  {match.status === 'played' ? (
+                    <div className="text-xs font-medium px-2 py-1 rounded-full bg-green-100 text-green-800">
+                      Tamamlandı
+                    </div>
+                  ) : (
+                    <div className="text-xs font-medium px-2 py-1 rounded-full bg-blue-100 text-blue-800">
+                      Yaklaşan
+                    </div>
+                  )}
+                  <div className="text-lg font-bold mt-2">VS</div>
+                </div>
+                
+                <div className="text-center flex-1 flex flex-col items-center">
+                  <div className="h-16 w-16 relative mb-2 bg-gray-100 rounded-full p-1">
+                    <div className="relative h-full w-full">
+                      <Image 
+                        src={match.awayTeam.logo} 
+                        alt={match.awayTeam.name}
+                        fill 
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
+                  <div className="font-semibold">{match.awayTeam.name}</div>
+                  {match.status === 'played' && (
+                    <div className="text-xl font-bold mt-1">{match.awayTeam.score}</div>
+                  )}
+                </div>
+              </div>
+              
+              <div className="border-t border-gray-100 pt-4">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-10 w-10 relative rounded-full overflow-hidden bg-gray-100">
+                    <Image 
+                      src={match.referee.image} 
+                      alt={match.referee.name}
+                      fill 
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <div className="text-sm text-gray-500">Hakem</div>
+                    <div className="font-medium">{match.referee.name}</div>
+                  </div>
+                </div>
+                
+                {match.status === 'played' ? (
+                  <Link 
+                    href={`/maclar/${match.id}`}
+                    className="block w-full text-center bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-md transition-colors"
+                  >
+                    Hakemi Değerlendir
+                  </Link>
+                ) : (
+                  <div className="text-center py-2 text-sm text-gray-500">
+                    Maç tamamlandıktan sonra hakem değerlendirilebilir
+                  </div>
+                )}
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+}

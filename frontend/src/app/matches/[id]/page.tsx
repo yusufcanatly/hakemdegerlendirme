@@ -1,0 +1,1 @@
+// Bu dosya silinecek ve yerine maclar/[id]/page.tsx kullanılacak. 
